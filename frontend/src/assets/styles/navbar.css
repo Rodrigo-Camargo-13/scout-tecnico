@@ -1,0 +1,33 @@
+.navbar {
+    margin-left: auto;
+    margin-right: 30px;
+    font-size: 18px; /* Aumente o tamanho da fonte aqui */
+    background: none;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    background: none;
+  }
+  
+  .navbar ul li {
+    margin: 0 15px;
+    background: none;
+  }
+  
+  .navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    background: none;
+    font-size: 18px; /* Aumente o tamanho da fonte aqui */
+  }
+  
+  .navbar ul li a:hover,
+  .navbar ul li a.active {
+    color: red;
+    text-decoration: none;
+  }
+  

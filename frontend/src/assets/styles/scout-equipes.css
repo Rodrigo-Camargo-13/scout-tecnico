@@ -1,0 +1,217 @@
+.scout-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scout-card h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.scout-card p {
+  color: #666;
+  margin: 5px 0;
+}
+
+.scout-equipes-page {
+  height: 100vh;
+  overflow: hidden;
+  background: url('../images/fundo_scout.png') no-repeat center center;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.scout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px;
+  background-color: #1C1B1B;
+}
+
+.scout-logo {
+  width: 250px;
+  height: auto;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.navbar-container {
+  margin-right: 30px;
+}
+
+.navbar-container a {
+  font-size: 16px;
+  margin-left: 10px;
+  background: none;
+}
+
+.navbar-container a.active {
+  color: red;
+}
+
+.scout-main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 287px;
+  height: 798px;
+  background-color: rgba(0, 126, 122, 0.15);
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: -25px;
+  margin-top: -19px;
+}
+
+.sidebar h2 {
+  margin-top: 30%;
+  margin-bottom: 0px;
+  padding: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 30px;
+}
+
+.sidebar ul li {
+  margin-bottom: 40px;
+}
+
+.sidebar ul li span {
+  display: block;
+  font-size: 15px;
+  color: #ccc;
+}
+
+.content-area {
+  margin-left: 20px;
+  flex: 1;
+}
+
+.top-box {
+  width: 871px;
+  height: 47px;
+  background-color: rgba(0, 179, 255, 0.12);
+  margin-bottom: 20px;
+  position: absolute;
+  top: 144px;
+  left: 316px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.search-input {
+  background: none;
+  border: none;
+  color: white;
+  margin-left: 10px;
+  flex: 1;
+}
+
+.search-input::placeholder {
+  color: white;
+}
+
+.filter-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.add-team-button {
+  width: 167px;
+  height: 47px;
+  background-color: rgba(0, 179, 255, 0.5);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.add-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.add-button-text {
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.notification-box {
+  background-color: rgba(0, 179, 255, 0.15);
+  padding: 20px;
+  margin-bottom: 30px;
+  position: absolute;
+  top: 250px;
+  left: 316px;
+  width: 871px;
+  height: auto;
+  font-size: 16px;
+  margin-left: -1px;
+  border-radius: 5px;
+}
+
+.topics {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  position: absolute;
+  border-radius: 5px;
+  top: 390px;
+  left: 315px;
+  width: 1149px;
+  font-size: 14px;
+  background-color: rgba(0, 179, 255, 0.12);
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.topics span {
+  flex: 1;
+  text-align: center;
+}
+
+.horizontal-box {
+  width: 1149px;
+  height: 46px;
+  background-color: rgba(0, 179, 255, 0.12);
+  margin-bottom: 20px;
+  position: relative;
+  top: 370px;
+  left: 13px;
+  border-radius: 5px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  padding: 15px;
+}
+
+.horizontal-box span {
+  flex: 1;
+  text-align: center;
+}

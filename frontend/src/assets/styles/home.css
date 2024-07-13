@@ -1,0 +1,68 @@
+.home-page {
+  height: 100vh;
+  overflow: hidden;
+  background-color: #1C1B1B;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px;
+  background: none;
+}
+
+.home-logo {
+  width: 250px;
+  height: auto;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.navbar-container {
+  margin-right: 30px;
+}
+
+.navbar-container a {
+  font-size: 16px;
+  margin-left: 10px;
+  background: none !important;
+}
+
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: url('../images/fundo_home.png') no-repeat center center;
+  background-size: cover;
+  padding: 5px;
+}
+
+.home-content {
+  max-width: 700px;
+  background: rgba(28, 27, 27, 0.55);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  margin-left: 30px;
+}
+
+.home-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.home-text {
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.text-center {
+  text-align: center;
+}

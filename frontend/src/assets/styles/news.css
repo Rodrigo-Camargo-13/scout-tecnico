@@ -1,0 +1,109 @@
+.news-page {
+    height: 100vh;
+    background-color: #1C1B1B;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.news-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 30px;
+    background: none;
+}
+
+.news-logo {
+    width: 250px;
+    height: auto;
+    cursor: pointer;
+}
+
+.navbar-container {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-container a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.navbar-container a:hover {
+    color: red;
+}
+
+.navbar-container a.active {
+    color: red;
+}
+
+.news-main {
+    flex: 1;
+    position: relative;
+}
+
+.news-item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.vasco {
+    left: 30px;
+    top: 10px;
+    width: 950px;
+    height: 500px;
+}
+
+.sao-paulo {
+    right: 100px;
+    top: 10px;
+    width: 320px;
+    height: 50px;
+}
+
+.corinthians {
+    right: 100px;
+    top: 360px;
+    width: 320px;
+    height: 270px;
+}
+
+.news-item img {
+    width: 110%;
+    height: 600px;
+    border-radius: 5px;
+}
+
+.news-title {
+    margin-top: 10px;
+}
+
+.vasco-title {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.sao-paulo-title {
+    font-size: 16px;
+}
+
+.corinthians-title {
+    font-size: 16px;
+}
+
+.news-link {
+    color: red;
+    text-decoration: none;
+    align-self: flex-end;
+    margin-top: 2px;
+    margin-right: -35px;
+}
+
+.news-link:hover {
+    text-decoration: underline;
+}
