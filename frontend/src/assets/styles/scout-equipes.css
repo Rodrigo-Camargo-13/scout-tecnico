@@ -215,3 +215,13 @@
   flex: 1;
   text-align: center;
 }
+.register-team-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+.register-team-link:hover {
+  text-decoration: underline;
+}

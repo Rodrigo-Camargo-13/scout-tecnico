@@ -19,14 +19,35 @@ const ForgotPassword = () => {
       return;
     }
 
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('userPassword', password);
-
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-
-    navigate('/login');
+    // Faz o registro do usuário no backend
+    fetch('http://localhost:5000/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Erro ao registrar o usuário');
+        }
+      })
+      .then((data) => {
+        alert('Usuário registrado com sucesso!');
+        // Limpa os campos e redireciona para a página de login
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        navigate('/login');
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -67,7 +88,7 @@ const ForgotPassword = () => {
               className="forgot-password-input" 
               required
             />
-            <button type="submit" className="forgot-password-button">Confirmar Cadastro</button>
+            <button type="submit" className="forgot-password-button">Registrar</button>
           </form>
         </div>
       </main>

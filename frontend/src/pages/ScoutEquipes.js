@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Corrigido: Importar Link
 import Navbar from '../components/Navbar';
 import '../assets/styles/scout-equipes.css';
 import logo from '../assets/images/logo.png';
@@ -56,6 +56,9 @@ const ScoutEquipes = () => {
           onClick={() => navigate('/')} 
         />
         <Navbar showServices={true} />
+        <Link to="/register-team" className="register-team-link">
+          Cadastrar Novo Time
+        </Link>
       </header>
       <main className="scout-main">
         <div className="sidebar">
@@ -127,9 +130,6 @@ const ScoutEquipes = () => {
               </>
             )}
           </div>
-          <div className="horizontal-box"></div>
-          <div className="horizontal-box"></div>
-          <div className="horizontal-box"></div>
         </div>
       </main>
     </div>

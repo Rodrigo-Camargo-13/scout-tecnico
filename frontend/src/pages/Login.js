@@ -12,15 +12,32 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const storedEmail = localStorage.getItem('userEmail');
-    const storedPassword = localStorage.getItem('userPassword');
+    fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Usuário ou senha inválidos');
+        }
+      })
+      .then((data) => {
+        alert('Login bem-sucedido');
+        navigate('/services'); // Redireciona após login bem-sucedido
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
 
-    if (email === storedEmail && password === storedPassword) {
-      navigate('/services');
-    } else {
-      alert('Usuário não cadastrado.');
-    }
-
+    // Limpa os campos de email e senha após o login
     setEmail('');
     setPassword('');
   };

@@ -1,0 +1,49 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+      MYSQL_HOST: mysql  # Certifique-se de que o backend use o host correto
+      MYSQL_USER: root
+      MYSQL_PASSWORD: '186396'
+      MYSQL_DB: 'login_system'
+      MYSQL_PORT: 3306  # Porta interna do MySQL dentro do contêiner
+    volumes:
+      - ./backend:/app
+    networks:
+      - mvp_scout_network
+    depends_on:
+      - mysql  # O backend espera o MySQL estar disponível
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./frontend:/app
+    networks:
+      - mvp_scout_network
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: '186396'
+      MYSQL_DATABASE: 'login_system'
+    ports:
+      - "3307:3306"  # Porta 3307 exposta na máquina host e 3306 dentro do contêiner
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mvp_scout_network
+
+networks:
+  mvp_scout_network:
+    driver: bridge
+
+volumes:
+  db_data:
