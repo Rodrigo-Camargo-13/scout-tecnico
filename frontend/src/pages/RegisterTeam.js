@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import '../assets/styles/RegisterTeam.css';
@@ -7,20 +7,39 @@ import fundoConsulta from '../assets/images/fundo_consulta.png';
 
 const RegisterTeam = () => {
   const [teamName, setTeamName] = useState('');
+  const [teams, setTeams] = useState([]);
+  const [editTeamId, setEditTeamId] = useState(null);
   const navigate = useNavigate();
+
+  const fetchTeams = () => {
+    fetch('http://localhost:5000/teams', {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((data) => setTeams(data))
+      .catch((error) => alert('Erro ao carregar os times'));
+  };
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validação básica
     if (!teamName) {
       alert('O nome do time é obrigatório');
       return;
     }
 
-    // Lógica para registrar o time no backend
-    fetch('http://localhost:5000/register-team', {
-      method: 'POST',
+    const url = editTeamId
+      ? `http://localhost:5000/teams/${editTeamId}` // Atualizar time
+      : 'http://localhost:5000/register-team';  // Cadastrar time
+
+    const method = editTeamId ? 'PUT' : 'POST';
+
+    fetch(url, {
+      method: method,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -30,45 +49,69 @@ const RegisterTeam = () => {
     })
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          alert(editTeamId ? 'Time atualizado com sucesso!' : 'Time registrado com sucesso!');
+          setTeamName('');
+          setEditTeamId(null);
+          fetchTeams();
         } else {
-          throw new Error('Erro ao registrar o time');
+          throw new Error('Erro ao processar a requisição');
         }
       })
-      .then((data) => {
-        alert('Time registrado com sucesso!');
-        setTeamName('');  // Limpar o campo de input
-        navigate('/scout-equipes');  // Redirecionar após o registro
+      .catch((error) => alert(error.message));
+  };
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/teams/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert('Time deletado com sucesso');
+          fetchTeams();
+        } else {
+          throw new Error('Erro ao deletar o time');
+        }
       })
-      .catch((error) => {
-        alert(error.message);
-      });
+      .catch((error) => alert(error.message));
+  };
+
+  const handleEdit = (team) => {
+    setTeamName(team.name);
+    setEditTeamId(team.id);
   };
 
   return (
     <div className="register-team-page" style={{ backgroundImage: `url(${fundoConsulta})` }}>
       <header className="register-team-header">
-        <img 
-          src={logo} 
-          alt="Logo" 
-          className="register-team-logo" 
-          onClick={() => navigate('/')} 
-        />
+        <img src={logo} alt="Logo" className="register-team-logo" onClick={() => navigate('/')} />
         <Navbar showServices={false} />
       </header>
       <main className="register-team-main">
         <div className="register-team-box">
           <form onSubmit={handleSubmit} className="register-team-form">
-            <input 
-              type="text" 
-              placeholder="Nome do Time" 
-              value={teamName} 
-              onChange={(e) => setTeamName(e.target.value)} 
-              className="register-team-input" 
+            <input
+              type="text"
+              placeholder="Nome do Time"
+              value={teamName}
+              onChange={(e) => setTeamName(e.target.value)}
+              className="register-team-input"
               required
             />
-            <button type="submit" className="register-team-button">Cadastrar Time</button>
+            <button type="submit" className="register-team-button">
+              {editTeamId ? 'Atualizar Time' : 'Cadastrar Time'}
+            </button>
           </form>
+
+          <h2>Lista de Times</h2>
+          <ul>
+            {teams.map((team) => (
+              <li key={team.id}>
+                {team.name}
+                <button onClick={() => handleEdit(team)}>Editar</button>
+                <button onClick={() => handleDelete(team.id)}>Deletar</button>
+              </li>
+            ))}
+          </ul>
         </div>
       </main>
     </div>
