@@ -15,8 +15,9 @@ API desenvolvida para gerenciar dados de usuários, jogadores, times e treinador
 7. [Rotas Principais da API](#rotas-principais-da-api)
 8. [Documentação da API com Swagger](#documentação-da-api-com-swagger)
 9. [Frontend](#frontend)
-10. [Testes Automatizados](#testes-automatizados)
-11. [Licença](#licença)
+10. [Integração com API Externa](#integração-com-api-externa)
+11. [Testes Automatizados](#testes-automatizados)
+12. [Licença](#licença)
 
 ---
 
@@ -45,7 +46,7 @@ Este projeto é uma API RESTful construída com Flask para permitir operações 
 - Adição, atualização, exclusão e listagem de treinadores.
 - Integração com Swagger para documentação da API.
 - Utilização de Docker para deploy tanto do frontend quanto do backend.
-- Consumo de uma API externa pública de dados de partidas de futebol.
+- **Integração com API externa pública de dados de partidas de futebol.**
 
 ## Instalação
 
@@ -228,6 +229,28 @@ O frontend será acessível em `http://localhost:3000`.
 
 ---
 
+## Integração com API Externa
+
+A aplicação consome dados de partidas de futebol de uma API externa. Para isso, utilizamos a [Football Data API](https://www.football-data.org/), que oferece informações sobre campeonatos, times e jogadores.
+
+### Passos para utilizar a API:
+
+1. **Cadastro**: Acesse o [site da Football Data API](https://www.football-data.org/) e registre-se para obter uma chave de API (API Key).
+2. **Configuração**: Após receber a chave, configure o arquivo `.env` do projeto, adicionando a linha:
+
+```bash
+FOOTBALL_API_KEY=sua_chave_api_externa
+```
+
+3. **Licença e Limitações**: A API oferece um plano gratuito com limite de requisições por minuto e por dia. Caso precise de mais requisições, você pode verificar os planos pagos na [seção de preços](https://www.football-data.org/pricing).
+
+4. **Rotas Utilizadas**:
+   - `GET /competitions`: Retorna uma lista de competições.
+   - `GET /teams/{id}`: Retorna os detalhes de um time específico.
+   - `GET /matches`: Retorna informações sobre partidas de futebol.
+
+---
+
 ## Testes Automatizados
 
 Para rodar os testes automatizados da aplicação, siga os passos abaixo:
@@ -235,7 +258,9 @@ Para rodar os testes automatizados da aplicação, siga os passos abaixo:
 1. Ativar o ambiente virtual:
 
 ```bash
-source venv/bin/activate   # No Windows use `venv\Scripts\activate`
+source venv/bin
+
+/activate   # No Windows use `venv\Scripts\activate`
 ```
 
 2. Executar os testes:
@@ -253,7 +278,3 @@ pytest
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ---
-
-Essa é a versão corrigida do arquivo `README.md`, com todos os conflitos resolvidos, e inclui as recomendações necessárias para a instalação, execução e teste da aplicação.
-
-Se precisar de mais ajustes ou tiver dúvidas, estou à disposição!
