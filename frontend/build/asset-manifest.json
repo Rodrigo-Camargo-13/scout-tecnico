@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/static/css/main.18972630.chunk.css",
+    "main.js": "/static/js/main.047cfcd0.chunk.js",
+    "main.js.map": "/static/js/main.047cfcd0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.bce919bb.js",
+    "runtime-main.js.map": "/static/js/runtime-main.bce919bb.js.map",
+    "static/js/2.5cec6b88.chunk.js": "/static/js/2.5cec6b88.chunk.js",
+    "static/js/2.5cec6b88.chunk.js.map": "/static/js/2.5cec6b88.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.dd242a59a55c288033546dc659895215.js": "/precache-manifest.dd242a59a55c288033546dc659895215.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.18972630.chunk.css.map": "/static/css/main.18972630.chunk.css.map",
+    "static/js/2.5cec6b88.chunk.js.LICENSE.txt": "/static/js/2.5cec6b88.chunk.js.LICENSE.txt",
+    "static/media/corinthias.png": "/static/media/corinthias.275e400a.png",
+    "static/media/filtro.png": "/static/media/filtro.4943cb41.png",
+    "static/media/RegisterCoach.css": "/static/media/fundo_consulta.5a8cc17d.png",
+    "static/media/home.css": "/static/media/fundo_home.31bc7f10.png",
+    "static/media/fundo_login.png": "/static/media/fundo_login.f8926d72.png",
+    "static/media/scout-treinadores.css": "/static/media/fundo_scout.14ad6ee0.png",
+    "static/media/services.css": "/static/media/fundo_services.6dc413c8.png",
+    "static/media/icone_scout_jogador.png": "/static/media/icone_scout_jogador.bc23ea7f.png",
+    "static/media/icone_scout_time.png": "/static/media/icone_scout_time.e9484bbc.png",
+    "static/media/icone_scout_treinador.png": "/static/media/icone_scout_treinador.85143e51.png",
+    "static/media/logo.png": "/static/media/logo.1651bb82.png",
+    "static/media/lupa.png": "/static/media/lupa.8b26db7f.png",
+    "static/media/sao_paulo.png": "/static/media/sao_paulo.cc6c5b76.png",
+    "static/media/sinal_mais.png": "/static/media/sinal_mais.8a3a8ba3.png",
+    "static/media/vasco.png": "/static/media/vasco.729846a8.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bce919bb.js",
+    "static/js/2.5cec6b88.chunk.js",
+    "static/css/main.18972630.chunk.css",
+    "static/js/main.047cfcd0.chunk.js"
+  ]
+}

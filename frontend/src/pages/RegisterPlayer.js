@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import '../assets/styles/RegisterPlayer.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import '../assets/styles/RegisterPlayer.css';
 import logo from '../assets/images/logo.png';
 import fundoConsulta from '../assets/images/fundo_consulta.png';
 
@@ -17,7 +17,7 @@ const RegisterPlayer = () => {
     })
       .then((response) => response.json())
       .then((data) => setPlayers(data))
-      .catch((error) => alert('Erro ao carregar jogadores'));
+      .catch((error) => console.error('Erro ao carregar jogadores:', error));
   };
 
   useEffect(() => {
@@ -37,8 +37,8 @@ const RegisterPlayer = () => {
     }
 
     const url = editPlayerId
-      ? `http://localhost:5000/players/${editPlayerId}` // Atualizar jogador
-      : 'http://localhost:5000/register-player';  // Cadastrar jogador
+      ? `http://localhost:5000/players/${editPlayerId}`
+      : 'http://localhost:5000/register-player';
 
     const method = editPlayerId ? 'PUT' : 'POST';
 
@@ -83,13 +83,18 @@ const RegisterPlayer = () => {
   };
 
   return (
-    <div className="register-player-page" style={{ backgroundImage: `url(${fundoConsulta})` }}>
+    <div className="register-player-page" style={{ backgroundImage: `url(${fundoConsulta})`, backgroundSize: 'cover' }}>
       <header className="register-player-header">
-        <img src={logo} alt="Logo" className="register-player-logo" onClick={() => navigate('/')} />
+        <img
+          src={logo}
+          alt="Logo"
+          className="register-player-logo"
+          onClick={() => navigate('/')}
+        />
         <Navbar showServices={false} />
       </header>
-      <main className="register-player-main">
-        <div className="register-player-box">
+      <main className="register-page">
+        <div className="register-form-box">
           <form onSubmit={handleSubmit} className="register-player-form">
             <input
               type="text"
@@ -113,17 +118,21 @@ const RegisterPlayer = () => {
               {editPlayerId ? 'Atualizar Jogador' : 'Cadastrar Jogador'}
             </button>
           </form>
+        </div>
 
-          <h2>Lista de Jogadores</h2>
-          <ul>
+        <div className="register-box">
+          <h2 className="register-list-title">Lista de Jogadores</h2>
+          <div className="register-list">
             {players.map((player) => (
-              <li key={player.id}>
-                {player.name} - {player.position}
-                <button onClick={() => handleEdit(player)}>Editar</button>
-                <button onClick={() => handleDelete(player.id)}>Deletar</button>
-              </li>
+              <div key={player.id} className="register-list-item">
+                <span className="register-list-item-name">{player.name} - {player.position}</span>
+                <div className="register-list-item-buttons">
+                  <button className="register-edit-button" onClick={() => handleEdit(player)}>Editar</button>
+                  <button className="register-delete-button" onClick={() => handleDelete(player.id)}>Deletar</button>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </main>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import '../assets/styles/matches.css'; // Usando o novo estilo específico para Matches
+import '../assets/styles/matches.css'; // Use o arquivo de estilo correto
 import logo from '../assets/images/logo.png';
 import fundoConsulta from '../assets/images/fundo_consulta.png';
 
@@ -11,7 +11,7 @@ const Matches = () => {
   const navigate = useNavigate();
 
   const fetchMatches = () => {
-    fetch('http://backend:5000/football/matches', {  // Certifique-se de que está acessando corretamente o backend via Docker
+    fetch('http://localhost:5000/football/matches', {  // Certifique-se de usar localhost quando acessa fora do Docker
       method: 'GET',
       credentials: 'include', // Necessário para enviar as credenciais de sessão (cookie)
     })

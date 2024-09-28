@@ -56,9 +56,6 @@ const ScoutEquipes = () => {
           onClick={() => navigate('/')} 
         />
         <Navbar showServices={true} />
-        <Link to="/register-team" className="register-team-link">
-          Cadastrar Novo Time
-        </Link>
       </header>
       <main className="scout-main">
         <div className="sidebar">

@@ -1,3 +1,4 @@
+/* Estilos Gerais */
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +8,8 @@
 html, body {
   width: 100%;
   height: 100%;
+  max-width: 100vw; /* Limita a largura para 100% da viewport */
+  max-height: 100vh; /* Limita a altura para 100% da viewport */
   overflow: hidden;
 }
 
@@ -24,7 +27,6 @@ html, body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 30px;
-  background: none;
 }
 
 .register-coach-logo {
@@ -33,52 +35,73 @@ html, body {
   cursor: pointer;
 }
 
-.navbar {
-  margin-left: auto;
-  margin-right: 30px;
-  font-size: 16px;
-  background: none;
+/* Lista de Treinadores */
+.register-box {
+  background-color: rgba(28, 27, 27, 0.7);
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
 }
 
-.navbar ul {
-  list-style: none;
+.register-list-title {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.register-list {
   display: flex;
-  justify-content: center;
-  padding: 0;
-  background: none;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
 }
 
-.navbar ul li {
-  margin: 0 15px;
-  background: none;
-}
-
-.navbar ul li a {
-  color: #fff;
-  text-decoration: none;
-  background: none;
-}
-
-.navbar ul li a:hover,
-.navbar ul li a.active {
-  color: red;
-  text-decoration: none;
-}
-
-.register-coach-main {
-  flex: 1;
+.register-list-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  flex: 0 0 45%; /* Duas colunas */
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-.register-coach-box {
-  background: rgba(28, 27, 27, 0.5); /* Cor com 50% de transparência */
-  padding: 40px;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 400px;
-  width: 100%;
+.register-list-item-name {
+  color: white;
+  text-align: left;
+  flex-grow: 1;
+  font-size: 18px;
+}
+
+.register-list-item-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.register-edit-button, .register-delete-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.register-edit-button {
+  background-color: #f0ad4e;
+}
+
+.register-edit-button:hover {
+  background-color: #ffc107;
+}
+
+.register-delete-button {
+  background-color: #d9534f;
+}
+
+.register-delete-button:hover {
+  background-color: #c9302c;
 }
 
 .register-coach-form {
@@ -97,14 +120,10 @@ html, body {
 
 .register-coach-button {
   padding: 10px;
-  background-color: #14B3B3;
+  background-color: green;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-}
-
-.register-coach-button:hover {
-  background-color: #0f8888;
 }

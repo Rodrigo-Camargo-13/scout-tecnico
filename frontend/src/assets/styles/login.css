@@ -7,6 +7,8 @@
 html, body {
     width: 100%;
     height: 100%;
+    max-width: 100vw; /* Limita a largura para 100% da viewport */
+    max-height: 100vh; /* Limita a altura para 100% da viewport */
     overflow: hidden;
 }
 

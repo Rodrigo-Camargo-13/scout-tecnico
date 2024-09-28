@@ -15,3 +15,11 @@ Thumbs.db
 # Ignorar cache do ESLint e outras ferramentas
 .eslintcache
 .cache/
+
+# Ignorar arquivos do Python
+__pycache__/
+*.pyc
+
+# Ignorar arquivos de configuração e logs
+.env
+*.log

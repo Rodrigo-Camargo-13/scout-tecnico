@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../assets/styles/navbar.css'; // Importando o CSS da Navbar
+import '../assets/styles/navbar.css';
 
 const Navbar = ({ showServices }) => {
   const location = useLocation();

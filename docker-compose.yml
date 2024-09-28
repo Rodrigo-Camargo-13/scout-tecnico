@@ -6,28 +6,32 @@ services:
       - "5000:5000"
     environment:
       FLASK_ENV: development
-      MYSQL_HOST: mysql  # Certifique-se de que o backend use o host correto
+      MYSQL_HOST: mysql
       MYSQL_USER: root
       MYSQL_PASSWORD: '186396'
       MYSQL_DB: 'login_system'
-      MYSQL_PORT: 3306  # Porta interna do MySQL dentro do contêiner
+      MYSQL_PORT: 3306
     volumes:
       - ./backend:/app
     networks:
       - mvp_scout_network
     depends_on:
-      - mysql  # O backend espera o MySQL estar disponível
+      - mysql
+    restart: always  # Reiniciar automaticamente em caso de falha
 
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     stdin_open: true
     tty: true
     volumes:
       - ./frontend:/app
     networks:
       - mvp_scout_network
+    depends_on:
+      - backend  # Certifique-se de que o frontend aguarda o backend estar pronto
+    restart: always  # Reiniciar automaticamente em caso de falha
 
   mysql:
     image: mysql:8.0
@@ -35,11 +39,12 @@ services:
       MYSQL_ROOT_PASSWORD: '186396'
       MYSQL_DATABASE: 'login_system'
     ports:
-      - "3307:3306"  # Porta 3307 exposta na máquina host e 3306 dentro do contêiner
+      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:
       - mvp_scout_network
+    restart: always  # Reiniciar automaticamente em caso de falha
 
 networks:
   mvp_scout_network:

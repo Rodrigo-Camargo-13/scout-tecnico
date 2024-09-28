@@ -1,10 +1,10 @@
 import os
 import requests
 from flask import request, jsonify, Blueprint, session
+from marshmallow import Schema, fields, validate, ValidationError
 from flask_cors import CORS  # Importando o CORS
 from .models import User, Player, Team, Coach
 from . import db, bcrypt
-from flask_swagger_ui import get_swaggerui_blueprint
 
 # Definindo o blueprint para as rotas
 routes = Blueprint('routes', __name__)
@@ -15,21 +15,12 @@ CORS(routes, supports_credentials=True, resources={r"/*": {"origins": "*"}})  # 
 # ------------------------------------------
 
 SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.json'  # Local onde o arquivo swagger.json está armazenado
-
-swaggerui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL,
-    API_URL,
-    config={
-        'app_name': "API de Scout Técnico"
-    }
-)
+API_URL = '/static/swagger.json'  # Local onde o arquivo swagger.json estava armazenado antes de ser excluído
 
 # ------------------------------------------
 # ROTAS DA APLICAÇÃO
 # ------------------------------------------
 
-# Rota principal
 @routes.route('/', methods=['GET'])
 def home():
     return jsonify({"message": "Bem-vindo à API de Scout Técnico!"}), 200
@@ -61,7 +52,6 @@ def register():
 
     return jsonify({"message": "Usuário registrado com sucesso"}), 201
 
-
 @routes.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -81,27 +71,39 @@ def login():
     else:
         return jsonify({"message": "Credenciais inválidas"}), 401
 
+@routes.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user_id', None)
+    return jsonify({"message": "Logout realizado com sucesso"}), 200
+
 # ------------------------------------------
 # ROTAS PARA JOGADORES
 # ------------------------------------------
+
+# Validação para jogador usando Marshmallow
+class PlayerSchema(Schema):
+    name = fields.Str(required=True, validate=validate.Length(min=1))
+    position = fields.Str(required=True, validate=validate.Length(min=1))
+    team = fields.Str()
+    goals = fields.Int()
+    assists = fields.Int()
+
+player_schema = PlayerSchema()
 
 @routes.route('/register-player', methods=['POST'])
 def add_player():
     data = request.get_json()
 
-    # Validações
-    if not data.get('name') or not data.get('position'):
-        return jsonify({"message": "Nome e posição são obrigatórios"}), 400
-
-    # Verifica se o jogador já existe
-    player = Player.query.filter_by(name=data.get('name'), position=data.get('position')).first()
-    if player:
-        return jsonify({"message": "Jogador já está cadastrado"}), 400
+    # Valida os dados de entrada
+    try:
+        player_schema.load(data)
+    except ValidationError as err:
+        return jsonify(err.messages), 400
 
     new_player = Player(
-        name=data.get('name'),
-        position=data.get('position'),
-        team=data.get('team'),
+        name=data['name'],
+        position=data['position'],
+        team=data.get('team', None),
         goals=data.get('goals', 0),
         assists=data.get('assists', 0)
     )
@@ -109,7 +111,6 @@ def add_player():
     db.session.commit()
 
     return jsonify({"message": "Jogador adicionado com sucesso"}), 201
-
 
 @routes.route('/players', methods=['GET'])
 def get_players():
@@ -123,11 +124,16 @@ def get_players():
         "assists": player.assists
     } for player in players]), 200
 
-
 @routes.route('/players/<int:id>', methods=['PUT'])
 def update_player(id):
     player = Player.query.get_or_404(id)
     data = request.get_json()
+
+    # Valida os dados de entrada
+    try:
+        player_schema.load(data)
+    except ValidationError as err:
+        return jsonify(err.messages), 400
 
     # Atualizações
     player.name = data.get('name', player.name)
@@ -138,7 +144,6 @@ def update_player(id):
 
     db.session.commit()
     return jsonify({"message": "Jogador atualizado com sucesso"}), 200
-
 
 @routes.route('/players/<int:id>', methods=['DELETE'])
 def delete_player(id):
@@ -155,24 +160,19 @@ def delete_player(id):
 def add_team():
     data = request.get_json()
 
-    # Validações
-    if not data.get('name'):
-        return jsonify({"message": "Nome do time é obrigatório"}), 400
-
     # Verifica se o time já existe
     team = Team.query.filter_by(name=data.get('name')).first()
     if team:
         return jsonify({"message": "Time já está cadastrado"}), 400
 
     new_team = Team(
-        name=data.get('name'),
+        name=data['name'],
         coach=data.get('coach')
     )
     db.session.add(new_team)
     db.session.commit()
 
     return jsonify({"message": "Time adicionado com sucesso"}), 201
-
 
 @routes.route('/teams', methods=['GET'])
 def get_teams():
@@ -182,7 +182,6 @@ def get_teams():
         "name": team.name,
         "coach": team.coach
     } for team in teams]), 200
-
 
 @routes.route('/teams/<int:id>', methods=['PUT'])
 def update_team(id):
@@ -195,7 +194,6 @@ def update_team(id):
 
     db.session.commit()
     return jsonify({"message": "Time atualizado com sucesso"}), 200
-
 
 @routes.route('/teams/<int:id>', methods=['DELETE'])
 def delete_team(id):
@@ -212,10 +210,6 @@ def delete_team(id):
 def add_coach():
     data = request.get_json()
 
-    # Validações
-    if not data.get('name'):
-        return jsonify({"message": "Nome do treinador é obrigatório"}), 400
-
     # Verifica se o treinador já existe
     coach = Coach.query.filter_by(name=data.get('name')).first()
     if coach:
@@ -230,7 +224,6 @@ def add_coach():
 
     return jsonify({"message": "Treinador adicionado com sucesso"}), 201
 
-
 @routes.route('/coaches', methods=['GET'])
 def get_coaches():
     coaches = Coach.query.all()
@@ -239,7 +232,6 @@ def get_coaches():
         "name": coach.name,
         "team": coach.team
     } for coach in coaches]), 200
-
 
 @routes.route('/coaches/<int:id>', methods=['PUT'])
 def update_coach(id):
@@ -252,7 +244,6 @@ def update_coach(id):
 
     db.session.commit()
     return jsonify({"message": "Treinador atualizado com sucesso"}), 200
-
 
 @routes.route('/coaches/<int:id>', methods=['DELETE'])
 def delete_coach(id):
